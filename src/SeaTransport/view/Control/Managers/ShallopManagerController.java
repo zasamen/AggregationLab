@@ -1,8 +1,12 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.ShallopAdapter;
 import SeaTransport.ShipAdapter.VesselAdapter;
 import SeaTransport.Tooklits.Windows;
+import SeaTransport.view.Control.Controller;
+import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
+import SeaTransport.view.Control.Managers.Abstract.VesselController;
+import SeaTransport.view.Control.Managers.Abstract.VesselManagerController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;

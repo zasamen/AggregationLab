@@ -16,10 +16,10 @@ public class AircraftCarrierAdapter implements VesselAdapter{
         for (int i = 0; i < properties.length - 2; i++) {
             properties[i] = args[i].toString();
         }
-        properties[4] = args[5].toString();
+        properties[4] = args[4].toString();
         properties[5] = args[7].toString();
         objects = new Object[2];
-        objects[1] = args[4];
+        objects[0] = args[5];
         objects[1] = args[6];
     }
 

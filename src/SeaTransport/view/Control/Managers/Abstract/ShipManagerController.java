@@ -1,21 +1,26 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers.Abstract;
 
 import SeaTransport.Tooklits.Windows;
+import SeaTransport.view.Control.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class BoatManagerController extends Controller implements VesselController{
+import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
+
+public class ShipManagerController extends Controller implements VesselController{
 
     @FXML
     public BorderPane borderPane;
     public Button buttonSetShallop;
+    public TextField textFieldCrew;
 
 
-    private Object shallop=null;
+    private Object sail =null;
     private VesselManagerController vesselManagerController;
 
     @Override
@@ -26,7 +31,7 @@ public class BoatManagerController extends Controller implements VesselControlle
             vesselManagerController=loader.getController();
             vesselManagerController.setMain(getMain());
         }catch (IOException ioe){
-            Windows.showAlert(ioe+" ");
+            Windows.showAlert(ioe+"  ");
         }
     }
 
@@ -34,21 +39,20 @@ public class BoatManagerController extends Controller implements VesselControlle
     public Object[] getFields() {
         if (checkFields()) {
             Object[] objects = vesselManagerController.getFields();
-            if (objects != null) {
-                Object[] result = new Object[objects.length + 1];
-                System.arraycopy(objects, 0, result, 0, objects.length);
-                result[result.length - 1] = shallop;
-                return result;
-            } else
-                return null;
+            Object[] result = new Object[objects.length + 2];
+            System.arraycopy(objects, 0, result, 0, objects.length);
+            result[result.length - 1] = sail;
+            result[result.length - 2] = textFieldCrew.getText();
+            return result;
         } else
             return null;
     }
 
     @Override
     public boolean checkFields() {
-
-        return (vesselManagerController.checkFields()&&shallop!=null);
+        return (vesselManagerController.checkFields() &&
+                checkIntPositiveValue(textFieldCrew.getText(), "Crew") &&
+                sail != null);
     }
 
     @FXML
@@ -61,13 +65,13 @@ public class BoatManagerController extends Controller implements VesselControlle
             baseManagerController.setCheckedVessel("Shallop");
             baseManagerController.setMain(getMain());
             Windows.showWindowWithModality(loader, "Shallop", getMain());
-            if (baseManagerController.getModalResult()==1){
-                shallop=baseManagerController.getObject();
+            if (baseManagerController.getModalResult()!=1){
+                sail =null;
             }else {
-                shallop=null;
+                sail =baseManagerController.getObject();
             }
         } catch (Exception e) {
-            Windows.showAlert(e + "");
+            Windows.showAlert(e + " ");
         }
     }
 }

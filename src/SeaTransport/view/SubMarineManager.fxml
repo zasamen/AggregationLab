@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPane" minHeight="300.0" minWidth="300.0" style="-fx-border-color: black; -fx-border-width: 1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SeaTransport.view.Control.SubmarineManagerController">
+<BorderPane fx:id="borderPane" minHeight="300.0" minWidth="300.0" style="-fx-border-color: black; -fx-border-width: 1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SeaTransport.view.Control.Managers.SubmarineManagerController">
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>

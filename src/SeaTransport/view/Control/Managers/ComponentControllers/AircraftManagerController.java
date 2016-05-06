@@ -1,7 +1,10 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers.ComponentControllers;
 
-import SeaTransport.ShipAdapter.DeviceAdapter.ArmamentAdapter;
+import SeaTransport.ShipAdapter.DeviceAdapter.AircraftAdapter;
 import SeaTransport.ShipAdapter.DeviceAdapter.DeviceAdapter;
+import SeaTransport.view.Control.Controller;
+import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
+import SeaTransport.view.Control.Managers.Abstract.VesselController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -9,13 +12,13 @@ import javafx.scene.layout.GridPane;
 import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
 import static SeaTransport.Tooklits.ValueChecker.checkStringFullValue;
 
-public class ArmamentManagerController extends Controller implements DeviceManagerController,VesselController {
+public class AircraftManagerController extends Controller implements VesselController,DeviceManagerController {
 
 
     @FXML
     public GridPane gridPane;
+    public TextField textFieldWeight;
     public TextField textFieldModel;
-    public TextField textFieldCaliber;
 
     @Override
     protected void initialize(){
@@ -24,20 +27,20 @@ public class ArmamentManagerController extends Controller implements DeviceManag
 
     @Override
     public boolean checkFields() {
-        return (checkIntPositiveValue(textFieldCaliber.getText(),"Caliber")&&
+        return (checkIntPositiveValue(textFieldWeight.getText(),"Weight")&&
                 checkStringFullValue(textFieldModel.getText(),"Model"));
     }
 
     @Override
     public DeviceAdapter createAdapter() {
-        return (checkFields())?new ArmamentAdapter(getFields()):null;
+        return (checkFields())?new AircraftAdapter(getFields()):null;
     }
 
     @Override
     public Object[] getFields() {
         if (checkFields())
             return new Object[]{
-                    textFieldCaliber.getText(),
+                    textFieldWeight.getText(),
                     textFieldModel.getText(),
             };
         else

@@ -16,7 +16,7 @@ public class YachtAdapter implements VesselAdapter{
             properties[i]=args[i].toString();
         }
         objects=new Object[2];
-        System.arraycopy(args,properties.length-1,objects,0,2);
+        System.arraycopy(args,properties.length,objects,0,2);
     }
 
     @Override

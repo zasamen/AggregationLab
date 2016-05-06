@@ -10,14 +10,14 @@ public class SubmarineAdapter implements VesselAdapter{
 
     public SubmarineAdapter(Object... args) {
         properties = new String[7];
-        for (int i = 0; i < properties.length - 3; i++) {
+        for (int i = 0; i < properties.length - 2; i++) {
             properties[i] = args[i].toString();
         }
-        for (int i = 4; i < properties.length; i++) {
+        for (int i = 5; i < properties.length; i++) {
             properties[i] = args[i+1].toString();
         }
         objects = new Object[1];
-        objects[1] = args[4];
+        objects[0] = args[5];
     }
 
     @Override

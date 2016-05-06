@@ -1,27 +1,31 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers;
 
-import SeaTransport.ShipAdapter.CruiserAdapter;
+
+import SeaTransport.ShipAdapter.SubmarineAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
 import SeaTransport.Tooklits.Windows;
+import SeaTransport.view.Control.Controller;
+import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
+import SeaTransport.view.Control.Managers.Abstract.ShipManagerController;
+import SeaTransport.view.Control.Managers.Abstract.VesselController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
 import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
+import static SeaTransport.Tooklits.ValueChecker.checkStringFullValue;
 
-public class CruiserManagerController extends Controller implements VesselController,DeviceManagerController{
+public class SubmarineManagerController extends Controller implements VesselController,DeviceManagerController {
 
     @FXML
     public BorderPane borderPane;
-    public Button buttonSetArmament;
+    public TextField textFieldTorpedoType;
     public TextField textFieldCount;
 
 
-    private Object armament = null;
     private ShipManagerController shipManagerController;
 
     @Override
@@ -32,7 +36,7 @@ public class CruiserManagerController extends Controller implements VesselContro
             shipManagerController =loader.getController();
             shipManagerController.setMain(getMain());
         }catch (IOException ioe){
-            Windows.showAlert(ioe+"  ");
+            Windows.showAlert(ioe+"   ");
         }
     }
 
@@ -43,7 +47,7 @@ public class CruiserManagerController extends Controller implements VesselContro
             Object[] result = new Object[2+objects.length];
             System.arraycopy(objects, 0, result, 0, objects.length);
             result[result.length - 1] = textFieldCount.getText();
-            result[result.length - 2] = armament;
+            result[result.length - 2] = textFieldTorpedoType.getText();
             return result;
         } else
             return null;
@@ -52,31 +56,13 @@ public class CruiserManagerController extends Controller implements VesselContro
     @Override
     public boolean checkFields() {
 
-        return (shipManagerController.checkFields()&& armament !=null && checkIntPositiveValue(textFieldCount.getText(),"count"));
-    }
-
-    @FXML
-    public void handleButtonSetArmament(){
-        try {
-            FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getMain().getClass().getResource("view/BaseManager.fxml"));
-            loader.load();
-            BaseManagerController baseManagerController =loader.getController();
-            baseManagerController.setCheckedVessel("Armament");
-            baseManagerController.setMain(getMain());
-            Windows.showWindowWithModality(loader, "Armament", getMain());
-            if (baseManagerController.getModalResult()==1){
-                armament =baseManagerController.getObject();
-            }else {
-                armament =null;
-            }
-        } catch (Exception e) {
-            Windows.showAlert(e + "");
-        }
+        return (shipManagerController.checkFields()&&
+                checkStringFullValue(textFieldTorpedoType.getText(),"Torpedo Type")&&
+                checkIntPositiveValue(textFieldCount.getText(),"count"));
     }
 
     @Override
     public VesselOrDeviceAdapter createAdapter() {
-        return (checkFields())?new CruiserAdapter(getFields()):null;
+        return (checkFields())?new SubmarineAdapter(getFields()):null;
     }
 }

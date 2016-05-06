@@ -23,8 +23,8 @@
                     </items>
                   </Menu>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Edit" />
-                  <MenuItem mnemonicParsing="false" text="Remove" />
+                  <MenuItem fx:id="edit" mnemonicParsing="false" onAction="#handleEdit" text="Edit" />
+                  <MenuItem fx:id="remove" mnemonicParsing="false" onAction="#handleRemove" text="Remove" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="List">
@@ -48,7 +48,7 @@
       </MenuBar>
    </top>
    <center>
-      <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

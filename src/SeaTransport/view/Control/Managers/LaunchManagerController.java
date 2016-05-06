@@ -1,8 +1,14 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers;
 
+
+import SeaTransport.ShipAdapter.LaunchAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
-import SeaTransport.ShipAdapter.YachtAdapter;
 import SeaTransport.Tooklits.Windows;
+import SeaTransport.view.Control.Controller;
+import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
+import SeaTransport.view.Control.Managers.Abstract.BoatManagerController;
+import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
+import SeaTransport.view.Control.Managers.Abstract.VesselController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -10,14 +16,14 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class YachtManagerController extends Controller implements VesselController,DeviceManagerController{
+public class LaunchManagerController extends Controller implements VesselController,DeviceManagerController {
 
     @FXML
     public BorderPane borderPane;
-    public Button buttonSetSail;
+    public Button buttonSetEngine;
 
 
-    private Object sail = null;
+    private Object engine = null;
     private BoatManagerController boatManagerController;
 
     @Override
@@ -28,7 +34,7 @@ public class YachtManagerController extends Controller implements VesselControll
             boatManagerController =loader.getController();
             boatManagerController.setMain(getMain());
         }catch (IOException ioe){
-            Windows.showAlert(ioe+"  ");
+            Windows.showAlert(ioe+" ");
         }
     }
 
@@ -36,10 +42,13 @@ public class YachtManagerController extends Controller implements VesselControll
     public Object[] getFields() {
         if (checkFields()) {
             Object[] objects = boatManagerController.getFields();
+            if (objects != null) {
                 Object[] result = new Object[1+objects.length];
                 System.arraycopy(objects, 0, result, 0, objects.length);
-                result[result.length - 1] = sail;
+                result[result.length - 1] = engine;
                 return result;
+            } else
+                return null;
         } else
             return null;
     }
@@ -47,23 +56,23 @@ public class YachtManagerController extends Controller implements VesselControll
     @Override
     public boolean checkFields() {
 
-        return (boatManagerController.checkFields()&& sail !=null);
+        return (boatManagerController.checkFields()&& engine !=null);
     }
 
     @FXML
-    public void handleButtonSetSail(){
+    public void handleButtonSetEngine(){
         try {
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getMain().getClass().getResource("view/BaseManager.fxml"));
             loader.load();
             BaseManagerController baseManagerController =loader.getController();
-            baseManagerController.setCheckedVessel("Sail");
+            baseManagerController.setCheckedVessel("Engine");
             baseManagerController.setMain(getMain());
-            Windows.showWindowWithModality(loader, "Sail", getMain());
+            Windows.showWindowWithModality(loader, "Engine", getMain());
             if (baseManagerController.getModalResult()==1){
-                sail =baseManagerController.getObject();
+                engine =baseManagerController.getObject();
             }else {
-                sail =null;
+                engine =null;
             }
         } catch (Exception e) {
             Windows.showAlert(e + "");
@@ -72,6 +81,6 @@ public class YachtManagerController extends Controller implements VesselControll
 
     @Override
     public VesselOrDeviceAdapter createAdapter() {
-        return (checkFields())?new YachtAdapter(getFields()):null;
+        return (checkFields())?new LaunchAdapter(getFields()):null;
     }
 }

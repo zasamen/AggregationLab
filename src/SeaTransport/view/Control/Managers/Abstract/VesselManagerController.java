@@ -1,8 +1,7 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers.Abstract;
 
 
-import SeaTransport.Ships.Vessel;
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.view.Control.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;

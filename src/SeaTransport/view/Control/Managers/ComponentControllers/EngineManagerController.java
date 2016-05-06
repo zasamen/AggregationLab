@@ -1,8 +1,11 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers.ComponentControllers;
 
 
 import SeaTransport.ShipAdapter.DeviceAdapter.DeviceAdapter;
 import SeaTransport.ShipAdapter.DeviceAdapter.EngineAdapter;
+import SeaTransport.view.Control.Controller;
+import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
+import SeaTransport.view.Control.Managers.Abstract.VesselController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;

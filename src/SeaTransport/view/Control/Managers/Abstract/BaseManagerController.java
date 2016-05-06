@@ -1,6 +1,8 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers.Abstract;
 
 import SeaTransport.Tooklits.Windows;
+import SeaTransport.view.Control.Controller;
+import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -8,7 +10,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class BaseManagerController extends Controller{
+public class BaseManagerController extends Controller {
 
     private String checkedVessel;
 
@@ -23,7 +25,7 @@ public class BaseManagerController extends Controller{
 
     private DeviceManagerController objectManagerController;
 
-    void setCheckedVessel(String checkedVessel) {
+    public void setCheckedVessel(String checkedVessel) {
         this.checkedVessel = checkedVessel;
     }
 

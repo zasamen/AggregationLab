@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="gridPane" alignment="CENTER" hgap="5.0" style="-fx-border-width: 1; -fx-border-color: black;" vgap="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SeaTransport.view.Control.AircraftManagerController">
+<GridPane fx:id="gridPane" alignment="CENTER" hgap="5.0" style="-fx-border-width: 1; -fx-border-color: black;" vgap="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SeaTransport.view.Control.Managers.ComponentControllers.AircraftManagerController">
   <columnConstraints>
     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="227.0" minWidth="10.0" prefWidth="140.0" />
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="381.0" minWidth="10.0" prefWidth="326.0" />

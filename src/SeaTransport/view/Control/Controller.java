@@ -11,7 +11,7 @@ public abstract class Controller {
         initialize();
     }
 
-    Main getMain() {
+    public Main getMain() {
         return main;
     }
 

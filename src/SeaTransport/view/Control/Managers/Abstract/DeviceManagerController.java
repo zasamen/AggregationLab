@@ -1,4 +1,4 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers.Abstract;
 
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
 

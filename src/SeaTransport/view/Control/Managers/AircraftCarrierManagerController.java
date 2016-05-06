@@ -1,8 +1,13 @@
-package SeaTransport.view.Control;
+package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.AircraftCarrierAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
 import SeaTransport.Tooklits.Windows;
+import SeaTransport.view.Control.*;
+import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
+import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
+import SeaTransport.view.Control.Managers.Abstract.ShipManagerController;
+import SeaTransport.view.Control.Managers.Abstract.VesselController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -13,7 +18,7 @@ import java.io.IOException;
 
 import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
 
-public class AircraftCarrierManagerController extends Controller implements VesselController,DeviceManagerController{
+public class AircraftCarrierManagerController extends Controller implements VesselController,DeviceManagerController {
 
     @FXML
     public BorderPane borderPane;
