@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SeaTransport.view.Control.BaseManagerController">
+   <bottom>
+      <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="buttonAccept" defaultButton="true" mnemonicParsing="false" onAction="#handleButtonAccept" text="Accept">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleButtonDecline" text="Decline" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</BorderPane>
