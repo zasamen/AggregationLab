@@ -3,6 +3,7 @@ package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.LaunchAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
+import SeaTransport.Ships.Launch;
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
@@ -20,11 +21,12 @@ public class LaunchManagerController extends Controller implements VesselControl
 
     @FXML
     public BorderPane borderPane;
+    @FXML
     public Button buttonSetEngine;
-
 
     private Object engine = null;
     private BoatManagerController boatManagerController;
+    private Object downStreamObject;
 
     @Override
     protected void initialize() {
@@ -32,6 +34,7 @@ public class LaunchManagerController extends Controller implements VesselControl
             FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/BoatManager.fxml"));
             borderPane.setCenter(loader.load());
             boatManagerController =loader.getController();
+            boatManagerController.setDownStreamObject(downStreamObject);
             boatManagerController.setMain(getMain());
         }catch (IOException ioe){
             Windows.showAlert(ioe+" ");
@@ -55,7 +58,6 @@ public class LaunchManagerController extends Controller implements VesselControl
 
     @Override
     public boolean checkFields() {
-
         return (boatManagerController.checkFields()&& engine !=null);
     }
 
@@ -67,12 +69,13 @@ public class LaunchManagerController extends Controller implements VesselControl
             loader.load();
             BaseManagerController baseManagerController =loader.getController();
             baseManagerController.setCheckedVessel("Engine");
+            baseManagerController.setDownStreamObject((downStreamObject!=null)?((Launch)downStreamObject).getEngine():null);
             baseManagerController.setMain(getMain());
             Windows.showWindowWithModality(loader, "Engine", getMain());
             if (baseManagerController.getModalResult()==1){
                 engine =baseManagerController.getObject();
             }else {
-                engine =null;
+                engine =(downStreamObject!=null)?((Launch)downStreamObject).getEngine():null;
             }
         } catch (Exception e) {
             Windows.showAlert(e + "");
@@ -82,5 +85,10 @@ public class LaunchManagerController extends Controller implements VesselControl
     @Override
     public VesselOrDeviceAdapter createAdapter() {
         return (checkFields())?new LaunchAdapter(getFields()):null;
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }

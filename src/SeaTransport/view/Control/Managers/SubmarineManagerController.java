@@ -3,6 +3,7 @@ package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.SubmarineAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
+import SeaTransport.Ships.Submarine;
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
@@ -22,11 +23,15 @@ public class SubmarineManagerController extends Controller implements VesselCont
 
     @FXML
     public BorderPane borderPane;
+    @FXML
     public TextField textFieldTorpedoType;
+    @FXML
     public TextField textFieldCount;
 
 
     private ShipManagerController shipManagerController;
+    private Object downStreamObject;
+
 
     @Override
     protected void initialize() {
@@ -34,6 +39,11 @@ public class SubmarineManagerController extends Controller implements VesselCont
             FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/ShipManager.fxml"));
             borderPane.setCenter(loader.load());
             shipManagerController =loader.getController();
+            if (downStreamObject!=null) {
+                shipManagerController.setDownStreamObject(downStreamObject);
+                textFieldTorpedoType.setText(((Submarine)downStreamObject).getTorpedoType());
+                textFieldCount.setText(((Submarine)downStreamObject).getCount()+"");
+            }
             shipManagerController.setMain(getMain());
         }catch (IOException ioe){
             Windows.showAlert(ioe+"   ");
@@ -64,5 +74,10 @@ public class SubmarineManagerController extends Controller implements VesselCont
     @Override
     public VesselOrDeviceAdapter createAdapter() {
         return (checkFields())?new SubmarineAdapter(getFields()):null;
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }

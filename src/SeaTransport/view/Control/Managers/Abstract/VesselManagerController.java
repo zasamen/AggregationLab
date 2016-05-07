@@ -1,6 +1,7 @@
 package SeaTransport.view.Control.Managers.Abstract;
 
 
+import SeaTransport.Ships.Vessel;
 import SeaTransport.view.Control.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -16,9 +17,17 @@ public class VesselManagerController extends Controller implements VesselControl
     @FXML
     public TextField textFieldLength,textFieldCapacity,textFieldWidth,textFieldDisplacement;
 
+    private Object downStreamObject;
+
     @Override
     protected void initialize() {
-
+        if (downStreamObject!=null) {
+            Vessel vessel = (Vessel) downStreamObject;
+            textFieldLength.setText(vessel.getLength() + "");
+            textFieldWidth.setText(vessel.getWidth() + "");
+            textFieldCapacity.setText(vessel.getCapacity() + "");
+            textFieldDisplacement.setText(vessel.getDisplacement() + "");
+        }
     }
 
     @Override
@@ -41,5 +50,10 @@ public class VesselManagerController extends Controller implements VesselControl
             };
         else
             return null;
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }

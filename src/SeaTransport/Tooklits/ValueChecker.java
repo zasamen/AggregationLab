@@ -6,11 +6,15 @@ public class ValueChecker {
         if (field.trim().isEmpty()) {
             Windows.showAlert("Invalid " + fieldName);
             return false;
-        } else if ((Integer.valueOf(field) <= 0)) {
-            Windows.showAlert("Invalid " + fieldName);
-            return false;
-        }
-        return true;
+        } else
+            try {
+                int i = Integer.parseInt(field);
+                if (i<=0) throw  new NumberFormatException();
+                return true;
+            } catch (NumberFormatException nfe) {
+                Windows.showAlert("Invalid " + fieldName);
+                return false;
+            }
     }
     public static boolean checkStringFullValue(String field,String fieldName){
         if (field.trim().isEmpty()){

@@ -2,6 +2,8 @@ package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.CruiserAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
+import SeaTransport.Ships.AircraftCarrier;
+import SeaTransport.Ships.Cruiser;
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.*;
 import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
@@ -22,12 +24,15 @@ public class CruiserManagerController extends Controller implements VesselContro
 
     @FXML
     public BorderPane borderPane;
+    @FXML
     public Button buttonSetArmament;
+    @FXML
     public TextField textFieldCount;
 
 
     private Object armament = null;
     private ShipManagerController shipManagerController;
+    private Object downStreamObject;
 
     @Override
     protected void initialize() {
@@ -35,6 +40,9 @@ public class CruiserManagerController extends Controller implements VesselContro
             FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/ShipManager.fxml"));
             borderPane.setCenter(loader.load());
             shipManagerController =loader.getController();
+            shipManagerController.setDownStreamObject(downStreamObject);
+            if (downStreamObject!=null)
+                textFieldCount.setText(((AircraftCarrier)downStreamObject).getCount()+"");
             shipManagerController.setMain(getMain());
         }catch (IOException ioe){
             Windows.showAlert(ioe+"  ");
@@ -68,12 +76,13 @@ public class CruiserManagerController extends Controller implements VesselContro
             loader.load();
             BaseManagerController baseManagerController =loader.getController();
             baseManagerController.setCheckedVessel("Armament");
+            baseManagerController.setDownStreamObject((downStreamObject!=null)?((Cruiser)downStreamObject).getArmament():null);
             baseManagerController.setMain(getMain());
             Windows.showWindowWithModality(loader, "Armament", getMain());
             if (baseManagerController.getModalResult()==1){
                 armament =baseManagerController.getObject();
             }else {
-                armament =null;
+                armament =(downStreamObject!=null)?((Cruiser)downStreamObject).getArmament():null;
             }
         } catch (Exception e) {
             Windows.showAlert(e + "");
@@ -83,5 +92,10 @@ public class CruiserManagerController extends Controller implements VesselContro
     @Override
     public VesselOrDeviceAdapter createAdapter() {
         return (checkFields())?new CruiserAdapter(getFields()):null;
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }

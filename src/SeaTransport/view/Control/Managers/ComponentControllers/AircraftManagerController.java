@@ -2,6 +2,7 @@ package SeaTransport.view.Control.Managers.ComponentControllers;
 
 import SeaTransport.ShipAdapter.DeviceAdapter.AircraftAdapter;
 import SeaTransport.ShipAdapter.DeviceAdapter.DeviceAdapter;
+import SeaTransport.Ships.VesselComponent.Aircraft;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
 import SeaTransport.view.Control.Managers.Abstract.VesselController;
@@ -17,34 +18,44 @@ public class AircraftManagerController extends Controller implements VesselContr
 
     @FXML
     public GridPane gridPane;
+    @FXML
     public TextField textFieldWeight;
+    @FXML
     public TextField textFieldModel;
 
-    @Override
-    protected void initialize(){
+    private Object downStreamObject;
 
+    @Override
+    protected void initialize() {
+        if (downStreamObject!=null) {
+            Aircraft aircraft = (Aircraft) downStreamObject;
+            textFieldModel.setText(aircraft.getModel());
+            textFieldWeight.setText(aircraft.getWeight() + "");
+        }
     }
 
     @Override
     public boolean checkFields() {
-        return (checkIntPositiveValue(textFieldWeight.getText(),"Weight")&&
-                checkStringFullValue(textFieldModel.getText(),"Model"));
+        return (checkIntPositiveValue(textFieldWeight.getText(), "Weight") &&
+                checkStringFullValue(textFieldModel.getText(), "Model"));
     }
 
     @Override
     public DeviceAdapter createAdapter() {
-        return (checkFields())?new AircraftAdapter(getFields()):null;
+        return (checkFields()) ? new AircraftAdapter(getFields()) : null;
     }
 
     @Override
     public Object[] getFields() {
-        if (checkFields())
-            return new Object[]{
-                    textFieldWeight.getText(),
-                    textFieldModel.getText(),
-            };
-        else
-            return null;
+        return (checkFields()) ?
+                new Object[]{
+                textFieldWeight.getText(),
+                textFieldModel.getText(),
+        } : null;
     }
 
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
+    }
 }

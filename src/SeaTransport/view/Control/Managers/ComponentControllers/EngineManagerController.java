@@ -1,8 +1,8 @@
 package SeaTransport.view.Control.Managers.ComponentControllers;
 
-
 import SeaTransport.ShipAdapter.DeviceAdapter.DeviceAdapter;
 import SeaTransport.ShipAdapter.DeviceAdapter.EngineAdapter;
+import SeaTransport.Ships.VesselComponent.Engine;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
 import SeaTransport.view.Control.Managers.Abstract.VesselController;
@@ -17,13 +17,23 @@ public class EngineManagerController extends Controller implements VesselControl
 
     @FXML
     public GridPane gridPane;
+    @FXML
     public TextField textFieldVolume;
+    @FXML
     public TextField textFieldPower;
+    @FXML
     public TextField textFieldConsumption;
+
+    private Object downStreamObject;
 
     @Override
     protected void initialize(){
-
+        if (downStreamObject!=null) {
+            Engine engine = (Engine) downStreamObject;
+            textFieldVolume.setText(engine.getVolume() + "");
+            textFieldConsumption.setText(engine.getConsumption() + "");
+            textFieldPower.setText(engine.getPower() + "");
+        }
     }
 
     @Override
@@ -48,5 +58,10 @@ public class EngineManagerController extends Controller implements VesselControl
             };
         else
             return null;
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }

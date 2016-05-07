@@ -17,7 +17,7 @@ public abstract class Controller {
 
     private Stage stage;
 
-    public Stage getStage() {
+    protected Stage getStage() {
         return stage;
     }
 
@@ -26,4 +26,5 @@ public abstract class Controller {
     }
 
     protected abstract void initialize();
+
 }

@@ -2,6 +2,7 @@ package SeaTransport.view.Control.Managers.ComponentControllers;
 
 import SeaTransport.ShipAdapter.DeviceAdapter.ArmamentAdapter;
 import SeaTransport.ShipAdapter.DeviceAdapter.DeviceAdapter;
+import SeaTransport.Ships.VesselComponent.Armament;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
 import SeaTransport.view.Control.Managers.Abstract.VesselController;
@@ -17,12 +18,20 @@ public class ArmamentManagerController extends Controller implements DeviceManag
 
     @FXML
     public GridPane gridPane;
+    @FXML
     public TextField textFieldModel;
+    @FXML
     public TextField textFieldCaliber;
+
+    private Object downStreamObject;
 
     @Override
     protected void initialize(){
-
+        if (downStreamObject!=null) {
+            Armament armament = (Armament) downStreamObject;
+            textFieldModel.setText(armament.getModel());
+            textFieldCaliber.setText(armament.getCaliber() + "");
+        }
     }
 
     @Override
@@ -47,4 +56,8 @@ public class ArmamentManagerController extends Controller implements DeviceManag
             return null;
     }
 
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
+    }
 }

@@ -1,5 +1,6 @@
 package SeaTransport.view.Control.Managers.Abstract;
 
+import SeaTransport.Ships.Ship;
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.Controller;
 import javafx.fxml.FXML;
@@ -16,12 +17,15 @@ public class ShipManagerController extends Controller implements VesselControlle
 
     @FXML
     public BorderPane borderPane;
+    @FXML
     public Button buttonSetShallop;
+    @FXML
     public TextField textFieldCrew;
 
 
     private Object sail =null;
     private VesselManagerController vesselManagerController;
+    private Object downStreamObject;
 
     @Override
     protected void initialize() {
@@ -29,6 +33,9 @@ public class ShipManagerController extends Controller implements VesselControlle
             FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/VesselManager.fxml"));
             borderPane.setCenter(loader.load());
             vesselManagerController=loader.getController();
+            vesselManagerController.setDownStreamObject(downStreamObject);
+            if (downStreamObject!=null)
+                textFieldCrew.setText(((Ship)downStreamObject).getCrew()+"");
             vesselManagerController.setMain(getMain());
         }catch (IOException ioe){
             Windows.showAlert(ioe+"  ");
@@ -47,7 +54,6 @@ public class ShipManagerController extends Controller implements VesselControlle
         } else
             return null;
     }
-
     @Override
     public boolean checkFields() {
         return (vesselManagerController.checkFields() &&
@@ -63,15 +69,21 @@ public class ShipManagerController extends Controller implements VesselControlle
             loader.load();
             BaseManagerController baseManagerController =loader.getController();
             baseManagerController.setCheckedVessel("Shallop");
+            baseManagerController.setDownStreamObject((downStreamObject!=null)?((Ship)downStreamObject).getShallop():null);
             baseManagerController.setMain(getMain());
             Windows.showWindowWithModality(loader, "Shallop", getMain());
             if (baseManagerController.getModalResult()!=1){
-                sail =null;
+                sail =(downStreamObject!=null)?((Ship)downStreamObject).getShallop():null;
             }else {
                 sail =baseManagerController.getObject();
             }
         } catch (Exception e) {
             Windows.showAlert(e + " ");
         }
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }

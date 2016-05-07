@@ -2,6 +2,7 @@ package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
 import SeaTransport.ShipAdapter.YachtAdapter;
+import SeaTransport.Ships.Yacht;
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
@@ -19,11 +20,13 @@ public class YachtManagerController extends Controller implements VesselControll
 
     @FXML
     public BorderPane borderPane;
+    @FXML
     public Button buttonSetSail;
 
 
     private Object sail = null;
     private BoatManagerController boatManagerController;
+    private Object downStreamObject;
 
     @Override
     protected void initialize() {
@@ -31,6 +34,9 @@ public class YachtManagerController extends Controller implements VesselControll
             FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/BoatManager.fxml"));
             borderPane.setCenter(loader.load());
             boatManagerController =loader.getController();
+            if (downStreamObject!=null) {
+                boatManagerController.setDownStreamObject(downStreamObject);
+            }
             boatManagerController.setMain(getMain());
         }catch (IOException ioe){
             Windows.showAlert(ioe+"  ");
@@ -51,7 +57,6 @@ public class YachtManagerController extends Controller implements VesselControll
 
     @Override
     public boolean checkFields() {
-
         return (boatManagerController.checkFields()&& sail !=null);
     }
 
@@ -63,12 +68,13 @@ public class YachtManagerController extends Controller implements VesselControll
             loader.load();
             BaseManagerController baseManagerController =loader.getController();
             baseManagerController.setCheckedVessel("Sail");
+            baseManagerController.setDownStreamObject((downStreamObject!=null)?((Yacht)downStreamObject).getSail():null);
             baseManagerController.setMain(getMain());
             Windows.showWindowWithModality(loader, "Sail", getMain());
             if (baseManagerController.getModalResult()==1){
                 sail =baseManagerController.getObject();
             }else {
-                sail =null;
+                sail =(downStreamObject!=null)?((Yacht)downStreamObject).getSail():null;
             }
         } catch (Exception e) {
             Windows.showAlert(e + "");
@@ -78,5 +84,10 @@ public class YachtManagerController extends Controller implements VesselControll
     @Override
     public VesselOrDeviceAdapter createAdapter() {
         return (checkFields())?new YachtAdapter(getFields()):null;
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }

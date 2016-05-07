@@ -2,7 +2,6 @@ package SeaTransport.view.Control.Managers.Abstract;
 
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.Controller;
-import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -19,9 +18,9 @@ public class BaseManagerController extends Controller {
     @FXML
     public Button buttonAccept;
 
-    private int modalResult =0;
-
+    private int modalResult = 0;
     private Object object;
+    private Object downStreamObject;
 
     private DeviceManagerController objectManagerController;
 
@@ -32,27 +31,29 @@ public class BaseManagerController extends Controller {
     @Override
     protected void initialize() {
         try {
-            FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/" + checkedVessel + "Manager.fxml"));
+            FXMLLoader loader = new FXMLLoader(getMain().getClass().getResource("view/" + checkedVessel + "Manager.fxml"));
             borderPane.setCenter(loader.load());
-            objectManagerController =loader.getController();
+            objectManagerController = loader.getController();
+            objectManagerController.setDownStreamObject(downStreamObject);
             ((Controller) objectManagerController).setMain(getMain());
-        }catch (IOException ioe){
-            Windows.showAlert(ioe+"");
+        } catch (IOException ioe) {
+            Windows.showAlert(ioe + "");
         }
     }
 
     @FXML
-    public void handleButtonAccept(){
+    public void handleButtonAccept() {
         if ((objectManagerController).checkFields()) {
             object = objectManagerController.createAdapter().getObject();
             modalResult = 1;
             getStage().close();
         }
     }
+
     @FXML
-    public void handleButtonDecline(){
-        object=null;
-        modalResult =2;
+    public void handleButtonDecline() {
+        object = null;
+        modalResult = 2;
         getStage().close();
     }
 
@@ -63,4 +64,9 @@ public class BaseManagerController extends Controller {
     public Object getObject() {
         return object;
     }
+
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
+    }
+
 }

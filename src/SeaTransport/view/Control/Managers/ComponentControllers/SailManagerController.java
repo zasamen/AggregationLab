@@ -2,6 +2,7 @@ package SeaTransport.view.Control.Managers.ComponentControllers;
 
 import SeaTransport.ShipAdapter.DeviceAdapter.DeviceAdapter;
 import SeaTransport.ShipAdapter.DeviceAdapter.SailAdapter;
+import SeaTransport.Ships.VesselComponent.Sail;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
 import javafx.fxml.FXML;
@@ -14,12 +15,20 @@ public class SailManagerController extends Controller implements DeviceManagerCo
 
     @FXML
     public GridPane gridPane;
+    @FXML
     public TextField textFieldHeight;
+    @FXML
     public TextField textFieldWidth;
+
+    private Object downStreamObject;
 
     @Override
     protected void initialize(){
-
+        if (downStreamObject!=null) {
+            Sail sail = (Sail) downStreamObject;
+            textFieldHeight.setText(sail.getHeight() + "");
+            textFieldWidth.setText(sail.getWidth() + "");
+        }
     }
 
     @Override
@@ -44,4 +53,8 @@ public class SailManagerController extends Controller implements DeviceManagerCo
             return null;
     }
 
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
+    }
 }

@@ -1,5 +1,6 @@
 package SeaTransport.view.Control.Managers.Abstract;
 
+import SeaTransport.Ships.Boat;
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.Controller;
 import javafx.fxml.FXML;
@@ -13,21 +14,24 @@ public class BoatManagerController extends Controller implements VesselControlle
 
     @FXML
     public BorderPane borderPane;
+    @FXML
     public Button buttonSetShallop;
 
 
-    private Object shallop=null;
+    private Object shallop = null;
     private VesselManagerController vesselManagerController;
+    private Object downStreamObject;
 
     @Override
     protected void initialize() {
         try {
-            FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/VesselManager.fxml"));
+            FXMLLoader loader = new FXMLLoader(getMain().getClass().getResource("view/VesselManager.fxml"));
             borderPane.setCenter(loader.load());
-            vesselManagerController=loader.getController();
+            vesselManagerController = loader.getController();
+            vesselManagerController.setDownStreamObject(downStreamObject);
             vesselManagerController.setMain(getMain());
-        }catch (IOException ioe){
-            Windows.showAlert(ioe+" ");
+        } catch (IOException ioe) {
+            Windows.showAlert(ioe + " ");
         }
     }
 
@@ -48,27 +52,33 @@ public class BoatManagerController extends Controller implements VesselControlle
 
     @Override
     public boolean checkFields() {
-
-        return (vesselManagerController.checkFields()&&shallop!=null);
+        return (vesselManagerController.checkFields() && shallop != null);
     }
 
     @FXML
-    public void handleButtonSetShallop(){
+    public void handleButtonSetShallop() {
         try {
-            FXMLLoader loader=new FXMLLoader();
+            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getMain().getClass().getResource("view/BaseManager.fxml"));
             loader.load();
-            BaseManagerController baseManagerController =loader.getController();
+            BaseManagerController baseManagerController = loader.getController();
             baseManagerController.setCheckedVessel("Shallop");
+            baseManagerController.setDownStreamObject((downStreamObject != null) ? ((Boat) downStreamObject).getShallop() : null);
             baseManagerController.setMain(getMain());
             Windows.showWindowWithModality(loader, "Shallop", getMain());
-            if (baseManagerController.getModalResult()==1){
-                shallop=baseManagerController.getObject();
-            }else {
-                shallop=null;
+            if (baseManagerController.getModalResult() == 1) {
+                shallop = baseManagerController.getObject();
+            } else {
+                shallop = (downStreamObject != null) ? ((Boat) downStreamObject).getShallop() : null;
             }
         } catch (Exception e) {
             Windows.showAlert(e + "");
         }
     }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
+    }
+
 }

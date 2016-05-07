@@ -5,4 +5,6 @@ public interface VesselController {
     boolean checkFields();
 
     Object[] getFields();
+
+    void setDownStreamObject(Object downStreamObject);
 }

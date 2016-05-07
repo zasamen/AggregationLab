@@ -2,6 +2,7 @@ package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.AircraftCarrierAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
+import SeaTransport.Ships.AircraftCarrier;
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.*;
 import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
@@ -22,12 +23,15 @@ public class AircraftCarrierManagerController extends Controller implements Vess
 
     @FXML
     public BorderPane borderPane;
+    @FXML
     public Button buttonSetAircraft;
+    @FXML
     public TextField textFieldCount;
 
 
     private Object aircraft = null;
     private ShipManagerController shipManagerController;
+    private Object downStreamObject;
 
     @Override
     protected void initialize() {
@@ -35,6 +39,11 @@ public class AircraftCarrierManagerController extends Controller implements Vess
             FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/ShipManager.fxml"));
             borderPane.setCenter(loader.load());
             shipManagerController =loader.getController();
+            shipManagerController.setDownStreamObject(downStreamObject);
+            if (downStreamObject!=null) {
+                AircraftCarrier aircraftCarrier = (AircraftCarrier) downStreamObject;
+                textFieldCount.setText(aircraftCarrier.getCount() + "");
+            }
             shipManagerController.setMain(getMain());
         }catch (IOException ioe){
             Windows.showAlert(ioe+" ");
@@ -68,12 +77,13 @@ public class AircraftCarrierManagerController extends Controller implements Vess
             loader.load();
             BaseManagerController baseManagerController =loader.getController();
             baseManagerController.setCheckedVessel("Aircraft");
+            baseManagerController.setDownStreamObject((downStreamObject!=null)?((AircraftCarrier)downStreamObject).getAircraft():null);
             baseManagerController.setMain(getMain());
             Windows.showWindowWithModality(loader, "Aircraft", getMain());
             if (baseManagerController.getModalResult()==1){
                 aircraft =baseManagerController.getObject();
             }else {
-                aircraft =null;
+                aircraft =(downStreamObject!=null)?((AircraftCarrier)downStreamObject).getAircraft():null;
             }
         } catch (Exception e) {
             Windows.showAlert(e + "");
@@ -83,5 +93,10 @@ public class AircraftCarrierManagerController extends Controller implements Vess
     @Override
     public VesselOrDeviceAdapter createAdapter() {
         return (checkFields())?new AircraftCarrierAdapter(getFields()):null;
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }

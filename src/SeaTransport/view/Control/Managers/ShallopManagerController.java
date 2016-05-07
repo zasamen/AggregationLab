@@ -2,6 +2,7 @@ package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.ShallopAdapter;
 import SeaTransport.ShipAdapter.VesselAdapter;
+import SeaTransport.Ships.Shallop;
 import SeaTransport.Tooklits.Windows;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
@@ -20,29 +21,36 @@ public class ShallopManagerController extends Controller implements VesselContro
 
     @FXML
     public BorderPane borderPane;
+    @FXML
     public TextField textFieldType;
 
     private VesselManagerController vesselManagerController;
+    private Object downStreamObject;
 
     @Override
-    protected void initialize(){
+    protected void initialize() {
         try {
-            FXMLLoader loader=new FXMLLoader(getMain().getClass().getResource("view/VesselManager.fxml"));
+            FXMLLoader loader = new FXMLLoader(getMain().getClass().getResource("view/VesselManager.fxml"));
             borderPane.setCenter(loader.load());
-            vesselManagerController=loader.getController();
-        }catch (IOException ioe){
-            Windows.showAlert(ioe+"");
+            if (downStreamObject != null) {
+                textFieldType.setText(((Shallop) downStreamObject).getType());
+            }
+            vesselManagerController = loader.getController();
+            vesselManagerController.setDownStreamObject(downStreamObject);
+            vesselManagerController.setMain(getMain());
+        } catch (IOException ioe) {
+            Windows.showAlert(ioe + "");
         }
     }
 
     @Override
     public boolean checkFields() {
-        return (vesselManagerController.checkFields()&&checkStringFullValue(textFieldType.getText(),"Type"));
+        return (vesselManagerController.checkFields() && checkStringFullValue(textFieldType.getText(), "Type"));
     }
 
     @Override
     public VesselAdapter createAdapter() {
-        return (checkFields())?new ShallopAdapter(getFields()):null;
+        return (checkFields()) ? new ShallopAdapter(getFields()) : null;
     }
 
     @Override
@@ -58,5 +66,10 @@ public class ShallopManagerController extends Controller implements VesselContro
                 return null;
         } else
             return null;
+    }
+
+    @Override
+    public void setDownStreamObject(Object downStreamObject) {
+        this.downStreamObject = downStreamObject;
     }
 }
