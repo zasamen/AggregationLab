@@ -29,8 +29,20 @@
           </Menu>
           <Menu mnemonicParsing="false" text="List">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Open" />
-              <MenuItem mnemonicParsing="false" text="Save" />
+                  <Menu mnemonicParsing="false" text="Open">
+                    <items>
+                      <MenuItem fx:id="menuItemOpenXML" mnemonicParsing="false" onAction="#handleOpenXML" text="XML" />
+                        <MenuItem fx:id="menuItemOpenBIN" mnemonicParsing="false" onAction="#handleOpenBIN" text="BIN" />
+                        <MenuItem fx:id="menuItemTXT" mnemonicParsing="false" onAction="#handleOpenTXT" text="TXT" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Save">
+                    <items>
+                      <MenuItem fx:id="menuItemSaveXML" mnemonicParsing="false" onAction="#handleSaveXML" text="XML" />
+                        <MenuItem fx:id="menuItemSaveBIN" mnemonicParsing="false" onAction="#handleSaveBIN" text="BIN" />
+                        <MenuItem fx:id="menuItemSaveTXT" mnemonicParsing="false" onAction="#handleSaveTXT" text="TXT" />
+                    </items>
+                  </Menu>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Plugins">

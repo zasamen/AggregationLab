@@ -4,24 +4,25 @@ import SeaTransport.Ships.Vessel;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 public class XMLSerializer implements Serializer {
 
     @Override
-    public void serialize(FileOutputStream fos, List<Vessel> vesselList) throws IOException {
-        XMLEncoder xmlEncoder=new XMLEncoder(fos);
-        xmlEncoder.writeObject(vesselList);
-        xmlEncoder.flush();
+    public void serialize(OutputStream os, Object object) throws IOException {
+        XMLEncoder xmlEncoder=new XMLEncoder(os);
+        xmlEncoder.writeObject(object);
         xmlEncoder.close();
     }
     @SuppressWarnings("unchecked")
     @Override
-    public List<Vessel> deserialize(FileInputStream fis) throws ClassNotFoundException, IOException {
-        XMLDecoder xmlDecoder=new XMLDecoder(fis);
-        return (List<Vessel>)xmlDecoder.readObject();
+    public Object deserialize(InputStream is) throws ClassNotFoundException, IOException {
+        XMLDecoder xmlDecoder=new XMLDecoder(is);
+        Object object=xmlDecoder.readObject();
+        xmlDecoder.close();
+        return object;
     }
 }
