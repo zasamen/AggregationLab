@@ -1,6 +1,6 @@
 package SeaTransport;
 
-import SeaTransport.Ships.Vessel;
+
 import SeaTransport.view.Control.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Stage stage;
-    private Vessel vessel;
 
 
     public Stage getStage() {
@@ -27,10 +26,6 @@ public class Main extends Application {
         ((MainController)loader.getController()).setMain(this);
 
         primaryStage.show();
-    }
-
-    public void setVessel(Vessel vessel) {
-        this.vessel = vessel;
     }
 
     public static void main(String[] args) {

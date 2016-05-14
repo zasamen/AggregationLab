@@ -4,8 +4,6 @@ import SeaTransport.Ships.Launch;
 import SeaTransport.Ships.Shallop;
 import SeaTransport.Ships.Vessel;
 import SeaTransport.Ships.VesselComponent.Engine;
-import SeaTransport.Ships.VesselComponent.Sail;
-import SeaTransport.Ships.Yacht;
 
 public class LaunchAdapter implements VesselAdapter{
     private String[] properties;

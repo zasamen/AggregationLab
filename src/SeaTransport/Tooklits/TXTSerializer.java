@@ -1,18 +1,11 @@
 package SeaTransport.Tooklits;
 
-import SeaTransport.Ships.Shallop;
 import SeaTransport.Ships.Vessel;
-import SeaTransport.Ships.VesselComponent.Aircraft;
-import SeaTransport.Ships.VesselComponent.Armament;
-import SeaTransport.Ships.VesselComponent.Engine;
-import SeaTransport.Ships.VesselComponent.Sail;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-
 public class TXTSerializer implements Serializer {
 
     @Override
@@ -89,24 +82,7 @@ public class TXTSerializer implements Serializer {
                         tempC = Class.forName(getClassName(s));
                         tempObj = tempC.newInstance();
                         setFields(tempC, br, tempObj);
-
-                        switch (getPropertyType(s)) {
-                            case "engine":
-                                f.set(obj, (Engine) tempObj);
-                                break;
-                            case "aircraft":
-                                f.set(obj, (Aircraft) tempObj);
-                                break;
-                            case "armament":
-                                f.set(obj, (Armament) tempObj);
-                                break;
-                            case "sail":
-                                f.set(obj, (Sail) tempObj);
-                                break;
-                            case "shallop":
-                                f.set(obj, (Shallop) tempObj);
-                                break;
-                        }
+                        f.set(obj,tempObj);
                         br.readLine();
                     } else {
                         value = getValue(s);

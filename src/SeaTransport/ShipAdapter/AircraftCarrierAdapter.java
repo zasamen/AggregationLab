@@ -1,11 +1,9 @@
 package SeaTransport.ShipAdapter;
 
 import SeaTransport.Ships.AircraftCarrier;
-import SeaTransport.Ships.Cruiser;
 import SeaTransport.Ships.Shallop;
 import SeaTransport.Ships.Vessel;
 import SeaTransport.Ships.VesselComponent.Aircraft;
-import SeaTransport.Ships.VesselComponent.Armament;
 
 public class AircraftCarrierAdapter implements VesselAdapter{
     private String[] properties;

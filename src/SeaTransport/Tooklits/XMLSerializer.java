@@ -1,13 +1,10 @@
 package SeaTransport.Tooklits;
 
-import SeaTransport.Ships.Vessel;
-
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
 
 public class XMLSerializer implements Serializer {
 
