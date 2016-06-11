@@ -1,4 +1,4 @@
-package SeaTransport.Tooklits;
+package SeaTransport.Toolkits;
 
 import SeaTransport.Main;
 import SeaTransport.view.Control.Controller;

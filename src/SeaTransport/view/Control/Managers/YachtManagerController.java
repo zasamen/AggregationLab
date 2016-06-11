@@ -3,7 +3,7 @@ package SeaTransport.view.Control.Managers;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
 import SeaTransport.ShipAdapter.YachtAdapter;
 import SeaTransport.Ships.Yacht;
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.Toolkits.Windows;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
 import SeaTransport.view.Control.Managers.Abstract.BoatManagerController;

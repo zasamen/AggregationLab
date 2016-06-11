@@ -1,4 +1,4 @@
-package SeaTransport.Tooklits;
+package SeaTransport.Toolkits;
 
 import SeaTransport.Ships.Vessel;
 import org.jetbrains.annotations.NotNull;
@@ -6,6 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
+
 public class TXTSerializer implements Serializer {
 
     @Override
@@ -16,8 +18,9 @@ public class TXTSerializer implements Serializer {
         Object object;
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            while(br.ready()){
-                string = br.readLine().trim();
+            string = br.readLine();
+            while(string!=null){
+                string = string.trim();
                 if ("object".equals(getRecType(string))) {
                     aClass = Class.forName(getClassName(string));
                     object = aClass.newInstance();
@@ -27,6 +30,7 @@ public class TXTSerializer implements Serializer {
                         vessels.add((Vessel) object);
                     }
                 }
+                string = br.readLine();
             }
         }
         catch(Exception exc){
@@ -39,7 +43,7 @@ public class TXTSerializer implements Serializer {
     @Override
     public void serialize(OutputStream os, Object object) {
         String outputString = "";
-        ArrayList<Vessel> vessels = (ArrayList<Vessel>)object;
+        List<Vessel> vessels = (List<Vessel>)object;
         outputString += "<list ";
         Class c = vessels.getClass();
         outputString += c.getName() + ">\n";
@@ -49,7 +53,6 @@ public class TXTSerializer implements Serializer {
         }
 
         outputString += "</list>";
-        System.out.println(outputString);
         try {
             os.write(outputString.getBytes());
             os.flush();
@@ -67,36 +70,36 @@ public class TXTSerializer implements Serializer {
         return s.split(" ")[2].replace(">", "");
     }
 
-    private static void setFields(Class c, BufferedReader br, Object obj){
-        Class tempC;
-        Object tempObj;
-        String s;
+    private static void setFields(Class c, BufferedReader br, Object object){
+        Class aClass;
+        Object tempObject;
+        String string;
         String value;
         try {
             if (c != null) {
                 for (Field f : c.getDeclaredFields()) {
                     f.setAccessible(true);
-                    s = br.readLine().trim();
+                    string = br.readLine().trim();
 
-                    if ("object".equals(getRecType(s))) {
-                        tempC = Class.forName(getClassName(s));
-                        tempObj = tempC.newInstance();
-                        setFields(tempC, br, tempObj);
-                        f.set(obj,tempObj);
+                    if ("object".equals(getRecType(string))) {
+                        aClass = Class.forName(getClassName(string));
+                        tempObject = aClass.newInstance();
+                        setFields(aClass, br, tempObject);
+                        f.set(object,tempObject);
                         br.readLine();
                     } else {
-                        value = getValue(s);
-                        switch (getPropertyType(s)) {
+                        value = getValue(string);
+                        switch (getPropertyType(string)) {
                             case "java.lang.String":
-                                f.set(obj, value);
+                                f.set(object, value);
                                 break;
                             case "int":
-                                f.set(obj, Integer.parseInt(value));
+                                f.set(object, Integer.parseInt(value));
                                 break;
                             }
                     }
                 }
-                setFields(c.getSuperclass(), br, obj);
+                setFields(c.getSuperclass(), br, object);
             }
         }
         catch(Exception exc){

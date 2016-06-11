@@ -10,8 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
-import static SeaTransport.Tooklits.ValueChecker.checkStringFullValue;
+import static SeaTransport.Toolkits.ValueChecker.checkIntPositiveValue;
+import static SeaTransport.Toolkits.ValueChecker.checkStringFullValue;
 
 public class AircraftManagerController extends Controller implements VesselController,DeviceManagerController {
 

@@ -4,7 +4,7 @@ package SeaTransport.view.Control.Managers;
 import SeaTransport.ShipAdapter.LaunchAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
 import SeaTransport.Ships.Launch;
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.Toolkits.Windows;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
 import SeaTransport.view.Control.Managers.Abstract.BoatManagerController;

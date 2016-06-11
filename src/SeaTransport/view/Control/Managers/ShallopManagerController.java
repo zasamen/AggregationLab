@@ -3,7 +3,7 @@ package SeaTransport.view.Control.Managers;
 import SeaTransport.ShipAdapter.ShallopAdapter;
 import SeaTransport.ShipAdapter.VesselAdapter;
 import SeaTransport.Ships.Shallop;
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.Toolkits.Windows;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
 import SeaTransport.view.Control.Managers.Abstract.VesselController;
@@ -15,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-import static SeaTransport.Tooklits.ValueChecker.checkStringFullValue;
+import static SeaTransport.Toolkits.ValueChecker.checkStringFullValue;
 
 public class ShallopManagerController extends Controller implements VesselController,DeviceManagerController {
 

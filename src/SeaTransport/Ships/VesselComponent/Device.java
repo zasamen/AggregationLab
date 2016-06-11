@@ -1,4 +1,6 @@
 package SeaTransport.Ships.VesselComponent;
 
-public abstract class Device {
+import java.io.Serializable;
+
+public abstract class Device implements Serializable{
 }

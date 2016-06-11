@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="PluginInterface:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PluginInterface_jar</output-path>
+    <root id="archive" name="PluginInterface.jar">
+      <element id="module-output" name="PluginInterface" />
+    </root>
+  </artifact>
+</component>

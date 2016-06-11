@@ -1,4 +1,4 @@
-package SeaTransport.Tooklits;
+package SeaTransport.Toolkits;
 
 public class ValueChecker {
 

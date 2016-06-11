@@ -47,7 +47,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Plugins">
             <items>
-              <MenuItem mnemonicParsing="false" text="Check" />
+              <MenuItem fx:id="menuItemPluginCheck" mnemonicParsing="false" onAction="#handleMenuItemPluginCheck" text="Check" />
             </items>
           </Menu>
         </menus>

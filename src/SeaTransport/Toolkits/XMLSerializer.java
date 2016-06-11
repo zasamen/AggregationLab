@@ -1,4 +1,4 @@
-package SeaTransport.Tooklits;
+package SeaTransport.Toolkits;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

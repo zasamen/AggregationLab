@@ -2,9 +2,8 @@ package SeaTransport.view.Control.Managers;
 
 import SeaTransport.ShipAdapter.CruiserAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
-import SeaTransport.Ships.AircraftCarrier;
 import SeaTransport.Ships.Cruiser;
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.Toolkits.Windows;
 import SeaTransport.view.Control.*;
 import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
@@ -18,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
+import static SeaTransport.Toolkits.ValueChecker.checkIntPositiveValue;
 
 public class CruiserManagerController extends Controller implements VesselController,DeviceManagerController {
 
@@ -42,7 +41,7 @@ public class CruiserManagerController extends Controller implements VesselContro
             shipManagerController =loader.getController();
             shipManagerController.setDownStreamObject(downStreamObject);
             if (downStreamObject!=null)
-                textFieldCount.setText(((AircraftCarrier)downStreamObject).getCount()+"");
+                textFieldCount.setText(((Cruiser)downStreamObject).getCount()+"");
             shipManagerController.setMain(getMain());
         }catch (IOException ioe){
             Windows.showAlert(ioe+"  ");

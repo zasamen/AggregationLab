@@ -1,6 +1,6 @@
 package SeaTransport.view.Control.Managers.Abstract;
 
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.Toolkits.Windows;
 import SeaTransport.view.Control.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

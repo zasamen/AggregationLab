@@ -1,7 +1,7 @@
 package SeaTransport.view.Control.Managers.Abstract;
 
 import SeaTransport.Ships.Ship;
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.Toolkits.Windows;
 import SeaTransport.view.Control.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
+import static SeaTransport.Toolkits.ValueChecker.checkIntPositiveValue;
 
 public class ShipManagerController extends Controller implements VesselController{
 

@@ -4,7 +4,7 @@ package SeaTransport.view.Control.Managers;
 import SeaTransport.ShipAdapter.SubmarineAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
 import SeaTransport.Ships.Submarine;
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.Toolkits.Windows;
 import SeaTransport.view.Control.Controller;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
 import SeaTransport.view.Control.Managers.Abstract.ShipManagerController;
@@ -16,8 +16,8 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
-import static SeaTransport.Tooklits.ValueChecker.checkStringFullValue;
+import static SeaTransport.Toolkits.ValueChecker.checkIntPositiveValue;
+import static SeaTransport.Toolkits.ValueChecker.checkStringFullValue;
 
 public class SubmarineManagerController extends Controller implements VesselController,DeviceManagerController {
 

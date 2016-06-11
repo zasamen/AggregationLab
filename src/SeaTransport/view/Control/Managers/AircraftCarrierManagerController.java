@@ -3,7 +3,7 @@ package SeaTransport.view.Control.Managers;
 import SeaTransport.ShipAdapter.AircraftCarrierAdapter;
 import SeaTransport.ShipAdapter.VesselOrDeviceAdapter;
 import SeaTransport.Ships.AircraftCarrier;
-import SeaTransport.Tooklits.Windows;
+import SeaTransport.Toolkits.Windows;
 import SeaTransport.view.Control.*;
 import SeaTransport.view.Control.Managers.Abstract.BaseManagerController;
 import SeaTransport.view.Control.Managers.Abstract.DeviceManagerController;
@@ -17,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-import static SeaTransport.Tooklits.ValueChecker.checkIntPositiveValue;
+import static SeaTransport.Toolkits.ValueChecker.checkIntPositiveValue;
 
 public class AircraftCarrierManagerController extends Controller implements VesselController,DeviceManagerController {
 

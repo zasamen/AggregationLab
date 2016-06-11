@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AES/AES.iml" filepath="$PROJECT_DIR$/AES/AES.iml" />
       <module fileurl="file://$PROJECT_DIR$/AggregationLab.iml" filepath="$PROJECT_DIR$/AggregationLab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DES/DES.iml" filepath="$PROJECT_DIR$/DES/DES.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PluginInterface/PluginInterface.iml" filepath="$PROJECT_DIR$/PluginInterface/PluginInterface.iml" />
     </modules>
   </component>
 </project>
